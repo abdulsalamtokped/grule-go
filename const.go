@@ -4,14 +4,14 @@ const (
 	ruleBag = `
 		rule CheckPackageTypeV1 "Check package type v1" {
 			when
-				Package.Module == "Bag"
+				Package.Module == Module
 			then
 				CheckBag();
 		}
 
 		rule CheckBag "Check Bag" {
 			when
-				Package.Type == 1
+				Package.Type == Type
 			then
 				CheckValidation();
 		}

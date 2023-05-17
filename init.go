@@ -18,7 +18,8 @@ func main() {
 	}
 	// Register the global function with the data context.
 	dataContext.Add("Package", pkgs)
-	dataContext.Add("Params", "custom")
+	dataContext.Add("Module", "Bag")
+	dataContext.Add("Type", 1)
 
 	// Init the data-data.
 	lib := ast.NewKnowledgeLibrary()
