@@ -21,7 +21,6 @@ const (
 				Package.RunValidationWarehouseCheck() == true && Package.RunValidationShipper() == true
 			then
 				Package.Complete();
-				Retract("CheckPackageTypeV1");
 		}
 	`
 )
