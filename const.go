@@ -2,20 +2,18 @@ package main
 
 const (
 	ruleBag = `
-		rule CheckPackageTypeV1 "Check package type v1" {
+		rule CheckModule "Check package type v1" {
 			when
 				Package.Module == Module
 			then
-				CheckBag();
+				CheckType();
 		}
-
-		rule CheckBag "Check Bag" {
+		rule CheckType "Check Package" {
 			when
 				Package.Type == Type
 			then
 				CheckValidation();
 		}
-
 		rule CheckValidation "Check Validation" {
 			when
 				Package.RunValidationWarehouseCheck() == true && Package.RunValidationShipper() == true
