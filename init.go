@@ -1,12 +1,10 @@
 package main
 
 import (
+	"context"
 	"fmt"
 
-	"github.com/hyperjumptech/grule-rule-engine/ast"
-	"github.com/hyperjumptech/grule-rule-engine/builder"
-	"github.com/hyperjumptech/grule-rule-engine/engine"
-	"github.com/hyperjumptech/grule-rule-engine/pkg"
+	"github.com/grule-go/grule"
 )
 
 func main() {
@@ -18,23 +16,36 @@ func main() {
 	}
 
 	// Register the global function with the data context.
-	dataContext := ast.NewDataContext()
-	dataContext.Add("Package", pkgs)
-	dataContext.Add("Module", "Baag")
-	dataContext.Add("Type", 1)
+	// dataContext := ast.NewDataContext()
+	// dataContext.Add("Package", pkgs)
+	// dataContext.Add("Module", "Bag")
+	// dataContext.Add("Type", 1)
 
-	// Init the data-data.
-	lib := ast.NewKnowledgeLibrary()
-	ruleBuilder := builder.NewRuleBuilder(lib)
-	ruleBuilder.BuildRuleFromResource("Test", "0.1.1", pkg.NewBytesResource([]byte(rulePlain)))
-	// ruleBuilder.BuildRuleFromResource("Test", "0.1.1", pkg.Ne÷wBytesResource([]byte(ruleBag)))
-	// Config.
-	kb := lib.NewKnowledgeBaseInstance("Test", "0.1.1")
-	eng1 := &engine.GruleEngine{MaxCycle: 1, ReturnErrOnFailedRuleEvaluation: true}
+	// // Init the data-data.
+	// lib := ast.NewKnowledgeLibrary()
+	// ruleBuilder := builder.NewRuleBuilder(lib)
+	// ruleBuilder.BuildRuleFromResource("Test", "0.1.1", pkg.NewBytesResource([]byte(rulePlain)))
+	// // ruleBuilder.BuildRuleFromResource("Test", "0.1.1", pkg.Ne÷wBytesResource([]byte(ruleBag)))
+	// // Config.
+	// kb := lib.NewKnowledgeBaseInstance("Test", "0.1.1")
+	// eng1 := &engine.GruleEngine{MaxCycle: 1, ReturnErrOnFailedRuleEvaluation: true}
 
-	// Execute.
-	err := eng1.Execute(dataContext, kb)
+	// // See matching rules.
+	// _, err := eng1.FetchMatchingRules(dataContext, kb)
+
+	// // Execute.
+	// err = eng1.Execute(dataContext, kb)
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+
+	p := grule.New(grule.GruleOptions{MaxCycle: 1, ReturnErrOnFailedRuleEvaluation: true})
+	p.AppendDataContext("Package", pkgs)
+	p.AppendDataContext("Module", "Bag")
+	p.AppendDataContext("Type", 1)
+
+	err := p.ExecuteRule(context.Background(), rulePlain)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("err")
 	}
 }

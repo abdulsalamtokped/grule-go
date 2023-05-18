@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Package struct {
 	Module string
@@ -14,7 +17,6 @@ func (p *Package) RunValidationWarehouseCheck() bool {
 	return true
 }
 
-// Without scope.
 func (p *Package) RunValidationShipper() bool {
 	fmt.Println("run validator of shipper check")
 	return true
@@ -22,4 +24,9 @@ func (p *Package) RunValidationShipper() bool {
 
 func (p *Package) Complete() {
 	fmt.Println("completed")
+}
+
+func (p *Package) RunAfter() error {
+	fmt.Println("called")
+	return errors.New("error")
 }

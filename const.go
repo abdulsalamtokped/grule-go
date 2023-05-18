@@ -2,11 +2,12 @@ package main
 
 const (
 	rulePlain = `
-		rule Custom "Custom" {
+		rule Custom "Custom" salience 1{
 			when
 				Package.Module == Module
 			then
 				Log("Ok");
+				Package.RunAfter();
 		}
 	`
 	ruleBag = `
