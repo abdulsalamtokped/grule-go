@@ -8,6 +8,8 @@ const (
 			then
 				Log("Ok");
 				Package.RunAfter();
+
+				Complete();
 		}
 	`
 	ruleBag = `

@@ -6,7 +6,7 @@ import (
 	"github.com/hyperjumptech/grule-rule-engine/engine"
 )
 
-func New(options GruleOptions) *gruleEngine {
+func New(options RuleOptions) *gruleEngine {
 	if grule == nil {
 		grule = &gruleEngine{
 			validator: &engine.GruleEngine{

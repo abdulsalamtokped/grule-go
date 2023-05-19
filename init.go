@@ -38,14 +38,18 @@ func main() {
 	// if err != nil {
 	// 	fmt.Println(err)
 	// }
+	// fmt.Println(dataContext.IsComplete(), "HOW")
 
-	p := grule.New(grule.GruleOptions{MaxCycle: 1, ReturnErrOnFailedRuleEvaluation: true})
+	p := grule.New(grule.RuleOptions{MaxCycle: 1, ReturnErrOnFailedRuleEvaluation: true})
 	p.AppendDataContext("Package", pkgs)
 	p.AppendDataContext("Module", "Bag")
 	p.AppendDataContext("Type", 1)
 
 	err := p.ExecuteRule(context.Background(), rulePlain)
 	if err != nil {
-		fmt.Println("err")
+		fmt.Println("err 1")
+	}
+	if !p.IsRuleSucceedExecuted() {
+		fmt.Println("err 2")
 	}
 }
