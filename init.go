@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/grule-go/grule"
+	"github.com/hyperjumptech/grule-rule-engine/ast"
 )
 
 func main() {
@@ -41,15 +42,19 @@ func main() {
 	// fmt.Println(dataContext.IsComplete(), "HOW")
 
 	p := grule.New(grule.RuleOptions{MaxCycle: 1, ReturnErrOnFailedRuleEvaluation: true})
-	p.AppendDataContext("Package", pkgs)
-	p.AppendDataContext("Module", "Bag")
-	p.AppendDataContext("Type", 1)
+	// p.AppendDataContext("Package", pkgs)
+	// p.AppendDataContext("Module", "Bag")
+	// p.AppendDataContext("Type", 1)
 
-	err := p.ExecuteRule(context.Background(), rulePlain)
+	dataContext := ast.NewDataContext()
+	dataContext.Add("Package", pkgs)
+	dataContext.Add("Module", "Bag")
+	dataContext.Add("Type", 1)
+	err := p.ExecuteRule(context.Background(), dataContext, rulePlain)
 	if err != nil {
 		fmt.Println("err 1")
 	}
-	if !p.IsRuleSucceedExecuted() {
+	if !p.IsRuleSucceedExecuted(dataContext) {
 		fmt.Println("err 2")
 	}
 }

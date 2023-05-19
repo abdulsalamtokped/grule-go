@@ -5,7 +5,6 @@ import "github.com/hyperjumptech/grule-rule-engine/ast"
 type (
 	gruleEngine struct {
 		validator        gruleExecutorResource
-		dataCtx          gruleContextResource
 		ruleBuilder      gruleBuilderResource
 		knowledgeLibrary *ast.KnowledgeLibrary
 	}

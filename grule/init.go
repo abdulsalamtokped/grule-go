@@ -13,7 +13,6 @@ func New(options RuleOptions) *gruleEngine {
 				MaxCycle:                        options.MaxCycle,
 				ReturnErrOnFailedRuleEvaluation: options.ReturnErrOnFailedRuleEvaluation,
 			},
-			dataCtx:          ast.NewDataContext(),
 			knowledgeLibrary: ast.NewKnowledgeLibrary(),
 		}
 		grule.ruleBuilder = builder.NewRuleBuilder(grule.knowledgeLibrary)
